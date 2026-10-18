@@ -17,6 +17,12 @@
       "stage": "graph",
       "started": "2026-10-18T02:10:17.211776Z",
       "tool": "cmd/verifyfeeds"
+    },
+    {
+      "id": "75c8b37ca341",
+      "stage": "graph",
+      "started": "2026-10-18T02:31:22.203597Z",
+      "tool": "cmd/verifyfeeds"
     }
   ],
   "findings": [
@@ -2302,6 +2308,710 @@
       "supersedes": "6daa975a1577",
       "run_id": "ac3b42ab3f9b",
       "at": "2026-10-18T02:10:23.554704Z"
+    },
+    {
+      "id": "fd355c50c3e6",
+      "entity": "https://netflixtechblog.com/feed",
+      "name": "Netflix TechBlog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-16",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-16T16:01:02Z"
+      },
+      "supersedes": "1573d2dfc0d2",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118022Z"
+    },
+    {
+      "id": "c613bc6a503f",
+      "entity": "https://blog.cloudflare.com/rss/",
+      "name": "Cloudflare Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "20 entries, newest 2026-10-16",
+      "source": {
+        "kind": "http+parse",
+        "items": 20,
+        "newest": "2026-10-16T13:00:00Z"
+      },
+      "supersedes": "1aecf1347433",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118049Z"
+    },
+    {
+      "id": "0dee7ae1adbd",
+      "entity": "https://aws.amazon.com/blogs/architecture/feed/",
+      "name": "AWS Architecture Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "20 entries, newest 2026-10-15",
+      "source": {
+        "kind": "http+parse",
+        "items": 20,
+        "newest": "2026-10-15T15:50:31Z"
+      },
+      "supersedes": "d1cd2b4c8ba7",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118052Z"
+    },
+    {
+      "id": "7f68a0bfb432",
+      "entity": "https://stripe.dev/blog/feed",
+      "name": "Stripe Dev Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "123 entries, newest 2026-10-13",
+      "source": {
+        "kind": "http+parse",
+        "items": 123,
+        "newest": "2026-10-13T00:00:00Z"
+      },
+      "supersedes": "098477e025f4",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118064Z"
+    },
+    {
+      "id": "e7cc0e18e6a3",
+      "entity": "https://www.datadoghq.com/blog/engineering/index.xml",
+      "name": "Datadog Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "100 entries, newest 2026-10-01",
+      "source": {
+        "kind": "http+parse",
+        "items": 100,
+        "newest": "2026-10-01T00:00:00Z"
+      },
+      "supersedes": "37be129c1240",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118067Z"
+    },
+    {
+      "id": "03e0cceddca1",
+      "entity": "https://engineering.fb.com/feed/",
+      "name": "Meta Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "9 entries, newest 2026-10-15",
+      "source": {
+        "kind": "http+parse",
+        "items": 9,
+        "newest": "2026-10-15T19:00:03Z"
+      },
+      "supersedes": "29882131798f",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.11807Z"
+    },
+    {
+      "id": "5b4ce3d12c20",
+      "entity": "https://discord.com/blog/rss.xml",
+      "name": "Discord Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "100 entries, newest 2026-10-06",
+      "source": {
+        "kind": "http+parse",
+        "items": 100,
+        "newest": "2026-10-06T00:00:00Z"
+      },
+      "supersedes": "a0afb7771157",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118072Z"
+    },
+    {
+      "id": "c96f79d7441a",
+      "entity": "https://slack.engineering/feed/",
+      "name": "Slack Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "8 entries, newest 2026-07-14",
+      "source": {
+        "kind": "http+parse",
+        "items": 8,
+        "newest": "2026-07-14T16:10:08Z"
+      },
+      "supersedes": "31690411d1db",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118075Z"
+    },
+    {
+      "id": "427f0bccf889",
+      "entity": "https://dropbox.tech/feed",
+      "name": "Dropbox Tech",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-09-29",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-09-29T13:00:00Z"
+      },
+      "supersedes": "470ee690e045",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118079Z"
+    },
+    {
+      "id": "f2c6dd1eb5c7",
+      "entity": "https://engineering.atspotify.com/feed/",
+      "name": "Spotify Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "5 entries, newest 2026-10-16",
+      "source": {
+        "kind": "http+parse",
+        "items": 5,
+        "newest": "2026-10-16T14:29:18Z"
+      },
+      "supersedes": "09e1cc6c978c",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118084Z"
+    },
+    {
+      "id": "3ce23a1d018c",
+      "entity": "https://github.blog/engineering/feed/",
+      "name": "GitHub Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-15",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-15T18:00:00Z"
+      },
+      "supersedes": "6493939e2866",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118086Z"
+    },
+    {
+      "id": "07d03dbf1279",
+      "entity": "https://medium.com/feed/airbnb-engineering",
+      "name": "Airbnb Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-13",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-13T17:01:02Z"
+      },
+      "supersedes": "18b9b564481d",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118088Z"
+    },
+    {
+      "id": "fb40bc38582d",
+      "entity": "https://medium.com/feed/pinterest-engineering",
+      "name": "Pinterest Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-09",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-09T15:01:02Z"
+      },
+      "supersedes": "3804b2827c29",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118091Z"
+    },
+    {
+      "id": "db7546648edf",
+      "entity": "https://shopify.engineering/blog.atom",
+      "name": "Shopify Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "432 entries, newest 2026-10-01",
+      "source": {
+        "kind": "http+parse",
+        "items": 432,
+        "newest": "2026-10-01T16:23:24Z"
+      },
+      "supersedes": "7e05076a1003",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118093Z"
+    },
+    {
+      "id": "be24fa824045",
+      "entity": "https://eng.lyft.com/feed",
+      "name": "Lyft Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-09-10",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-09-10T16:12:28Z"
+      },
+      "supersedes": "839c993e8ca4",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118095Z"
+    },
+    {
+      "id": "f9d919231e3b",
+      "entity": "https://engineering.grab.com/feed.xml",
+      "name": "Grab Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-13",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-13T00:23:00Z"
+      },
+      "supersedes": "efb3b3416abb",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118097Z"
+    },
+    {
+      "id": "6d2824839006",
+      "entity": "https://engineering.zalando.com/atom.xml",
+      "name": "Zalando Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "100 entries, newest 2026-10-11",
+      "source": {
+        "kind": "http+parse",
+        "items": 100,
+        "newest": "2026-10-11T22:00:00Z"
+      },
+      "supersedes": "bd4cc8f91043",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118099Z"
+    },
+    {
+      "id": "b8d42f6a6995",
+      "entity": "https://engineering.salesforce.com/feed/",
+      "name": "Salesforce Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-08",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-08T15:15:37Z"
+      },
+      "supersedes": "b4e6d043afd4",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118101Z"
+    },
+    {
+      "id": "41a9cc25a2b5",
+      "entity": "https://fly.io/blog/feed.xml",
+      "name": "Fly.io Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "40 entries, newest 2026-09-03",
+      "source": {
+        "kind": "http+parse",
+        "items": 40,
+        "newest": "2026-09-03T00:00:00Z"
+      },
+      "supersedes": "d6248e39ba68",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118102Z"
+    },
+    {
+      "id": "d68696dcc9da",
+      "entity": "https://planetscale.com/blog/rss.xml",
+      "name": "PlanetScale Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "25 entries, newest 2026-10-14",
+      "source": {
+        "kind": "http+parse",
+        "items": 25,
+        "newest": "2026-10-14T00:00:00Z"
+      },
+      "supersedes": "215ab5f955d0",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118104Z"
+    },
+    {
+      "id": "c2b8493c04bf",
+      "entity": "https://tailscale.com/blog/index.xml",
+      "name": "Tailscale Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "15 entries, newest 2026-10-16",
+      "source": {
+        "kind": "http+parse",
+        "items": 15,
+        "newest": "2026-10-16T14:00:00Z"
+      },
+      "supersedes": "2370e65f0e4d",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118106Z"
+    },
+    {
+      "id": "ccd328ce6285",
+      "entity": "https://www.honeycomb.io/feed",
+      "name": "Honeycomb Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "50 entries, newest 2026-10-16",
+      "source": {
+        "kind": "http+parse",
+        "items": 50,
+        "newest": "2026-10-16T14:26:42Z"
+      },
+      "supersedes": "f1c3fedc3c00",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118108Z"
+    },
+    {
+      "id": "4d9a574ed7f8",
+      "entity": "https://www.confluent.io/rss.xml",
+      "name": "Confluent Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-01",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-01T13:31:07Z"
+      },
+      "supersedes": "e0b035475bb6",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.11811Z"
+    },
+    {
+      "id": "396660357ca5",
+      "entity": "https://blog.janestreet.com/feed.xml",
+      "name": "Jane Street Tech Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "100 entries, newest 2026-10-13",
+      "source": {
+        "kind": "http+parse",
+        "items": 100,
+        "newest": "2026-10-13T00:00:00Z"
+      },
+      "supersedes": "0673f3bcdfd2",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118112Z"
+    },
+    {
+      "id": "829000af02cf",
+      "entity": "https://martinfowler.com/feed.atom",
+      "name": "Martin Fowler",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "30 entries, newest 2026-10-15",
+      "source": {
+        "kind": "http+parse",
+        "items": 30,
+        "newest": "2026-10-15T13:25:00Z"
+      },
+      "supersedes": "ed44aeca0345",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118114Z"
+    },
+    {
+      "id": "df08f9cdf0b8",
+      "entity": "https://www.allthingsdistributed.com/atom.xml",
+      "name": "All Things Distributed (Werner Vogels)",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-09-08",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-09-08T14:00:00Z"
+      },
+      "supersedes": "03ad92c35a01",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118116Z"
+    },
+    {
+      "id": "d81b620bc8ea",
+      "entity": "https://brooker.co.za/blog/rss.xml",
+      "name": "Marc Brooker",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "165 entries, newest 2026-10-04",
+      "source": {
+        "kind": "http+parse",
+        "items": 165,
+        "newest": "2026-10-04T00:00:00Z"
+      },
+      "supersedes": "c9a7ee77f5a8",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118117Z"
+    },
+    {
+      "id": "3c18ae041ccf",
+      "entity": "https://www.brendangregg.com/blog/rss.xml",
+      "name": "Brendan Gregg",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-02-06",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-02-06T13:00:00Z"
+      },
+      "supersedes": "abeb5355fa5d",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118119Z"
+    },
+    {
+      "id": "92ffc6d4a2ce",
+      "entity": "https://muratbuffalo.blogspot.com/feeds/posts/default",
+      "name": "Metadata (Murat Demirbas)",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "25 entries, newest 2026-10-11",
+      "source": {
+        "kind": "http+parse",
+        "items": 25,
+        "newest": "2026-10-11T01:37:26.362Z"
+      },
+      "supersedes": "bdc093b8cb02",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118122Z"
+    },
+    {
+      "id": "661b2a055db0",
+      "entity": "https://jepsen.io/blog.rss",
+      "name": "Jepsen",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "32 entries, newest 2026-09-22",
+      "source": {
+        "kind": "http+parse",
+        "items": 32,
+        "newest": "2026-09-22T00:00:00Z"
+      },
+      "supersedes": "8bd59b33cb5f",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118124Z"
+    },
+    {
+      "id": "a9c0a78e920f",
+      "entity": "https://aphyr.com/posts.atom",
+      "name": "Aphyr",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "12 entries, newest 2026-06-12",
+      "source": {
+        "kind": "http+parse",
+        "items": 12,
+        "newest": "2026-06-12T14:19:34Z"
+      },
+      "supersedes": "15d4a19ef70b",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118125Z"
+    },
+    {
+      "id": "122d4494e98b",
+      "entity": "https://danluu.com/atom.xml",
+      "name": "Dan Luu",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "128 entries, newest 2026-09-18",
+      "source": {
+        "kind": "http+parse",
+        "items": 128,
+        "newest": "2026-09-18T00:00:00Z"
+      },
+      "supersedes": "fba605871f63",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118128Z"
+    },
+    {
+      "id": "b652bfe71910",
+      "entity": "https://highscalability.com/rss/",
+      "name": "High Scalability",
+      "role": "catalog",
+      "status": "stale",
+      "claim": "15 entries, newest 2024-05-09",
+      "source": {
+        "kind": "http+parse",
+        "items": 15,
+        "newest": "2024-05-09T18:55:21Z"
+      },
+      "supersedes": "6287dbd8889f",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.11813Z"
+    },
+    {
+      "id": "5901c729b6b2",
+      "entity": "https://newsletter.pragmaticengineer.com/feed",
+      "name": "The Pragmatic Engineer",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "20 entries, newest 2026-10-15",
+      "source": {
+        "kind": "http+parse",
+        "items": 20,
+        "newest": "2026-10-15T16:55:18Z"
+      },
+      "supersedes": "1c06b391e3fc",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118132Z"
+    },
+    {
+      "id": "147faf6ca5b8",
+      "entity": "https://blog.bytebytego.com/feed",
+      "name": "ByteByteGo",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "20 entries, newest 2026-10-17",
+      "source": {
+        "kind": "http+parse",
+        "items": 20,
+        "newest": "2026-10-17T15:30:51Z"
+      },
+      "supersedes": "dd9ae0cbabe1",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118134Z"
+    },
+    {
+      "id": "51cf36faba14",
+      "entity": "https://www.infoq.com/feed/architecture-design/",
+      "name": "InfoQ Architecture \u0026 Design",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "15 entries, newest 2026-10-17",
+      "source": {
+        "kind": "http+parse",
+        "items": 15,
+        "newest": "2026-10-17T06:00:00Z"
+      },
+      "supersedes": "ae3a120bf5a2",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118138Z"
+    },
+    {
+      "id": "0f75241e9c57",
+      "entity": "https://www.uber.com/blog/engineering/rss/",
+      "name": "Uber Engineering",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://www.uber.com/blog/engineering/rss/: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://www.uber.com/blog/engineering/rss/: 404 Not Found",
+        "items": 0
+      },
+      "supersedes": "e5f4cabc5424",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118141Z"
+    },
+    {
+      "id": "6321700e183f",
+      "entity": "https://eng.uber.com/feed/",
+      "name": "Uber Engineering (legacy)",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://eng.uber.com/feed/: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://eng.uber.com/feed/: 404 Not Found",
+        "items": 0
+      },
+      "supersedes": "a52b15e30cef",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118143Z"
+    },
+    {
+      "id": "4e113aa6630e",
+      "entity": "https://www.uber.com/us/en/blog/feed/",
+      "name": "Uber Blog (us/en)",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://www.uber.com/us/en/blog/feed/: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://www.uber.com/us/en/blog/feed/: 404 Not Found",
+        "items": 0
+      },
+      "supersedes": "e5f4af6a956d",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118145Z"
+    },
+    {
+      "id": "8470a666ef1d",
+      "entity": "https://engineering.linkedin.com/blog.rss.html",
+      "name": "LinkedIn Engineering",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://engineering.linkedin.com/blog.rss.html: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://engineering.linkedin.com/blog.rss.html: 404 Not Found",
+        "items": 0
+      },
+      "supersedes": "0847da4e953d",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118148Z"
+    },
+    {
+      "id": "c32e15f37766",
+      "entity": "https://careersatdoordash.com/feed/",
+      "name": "DoorDash Engineering",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://careersatdoordash.com/feed/: 403 Forbidden",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://careersatdoordash.com/feed/: 403 Forbidden",
+        "items": 0
+      },
+      "supersedes": "b1a2a47161b8",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.11815Z"
+    },
+    {
+      "id": "619c0e85eba7",
+      "entity": "https://blog.twitter.com/engineering/en_us/blog.rss",
+      "name": "Twitter/X Engineering",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://blog.twitter.com/engineering/en_us/blog.rss: 403 Forbidden",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://blog.twitter.com/engineering/en_us/blog.rss: 403 Forbidden",
+        "items": 0
+      },
+      "supersedes": "69e3bc354fae",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118152Z"
+    },
+    {
+      "id": "c67c85b964f1",
+      "entity": "https://www.cockroachlabs.com/blog/index.xml",
+      "name": "CockroachDB Blog",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://www.cockroachlabs.com/blog/index.xml: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://www.cockroachlabs.com/blog/index.xml: 404 Not Found",
+        "items": 0
+      },
+      "supersedes": "749498a6b14e",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118154Z"
+    },
+    {
+      "id": "8f4fe195f627",
+      "entity": "https://stripe.com/blog/feed.rss",
+      "name": "Stripe Blog (stripe.com)",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "Get \"https://stripe.com/blog/feed.rss\": tls: failed to verify certificate: x509: “DigiCert TLS ECC P384 Root G5” certificate is revoked",
+      "source": {
+        "kind": "http+parse",
+        "error": "Get \"https://stripe.com/blog/feed.rss\": tls: failed to verify certificate: x509: “DigiCert TLS ECC P384 Root G5” certificate is revoked",
+        "items": 0
+      },
+      "supersedes": "8fce47cb3d4c",
+      "run_id": "75c8b37ca341",
+      "at": "2026-10-18T02:31:27.118156Z"
     }
   ]
 }

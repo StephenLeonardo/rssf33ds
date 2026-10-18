@@ -1,0 +1,2 @@
+go test fuzz v1
+[]byte("<rss>0<item><link>https:</A0>")

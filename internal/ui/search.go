@@ -152,10 +152,12 @@ func (m Model) searchCmd() tea.Cmd {
 		}
 	}
 	msg.docs = len(docs)
-	return func() tea.Msg {
+	return guard(func() tea.Msg {
 		msg.hits = search.Search(docs, msg.query, searchLimit)
 		return msg
-	}
+	}, func(error) tea.Msg {
+		return msg // no hits rather than no program
+	})
 }
 
 func (m Model) searchResults(msg searchResultsMsg) (tea.Model, tea.Cmd) {

@@ -1,19 +1,26 @@
 // Package fetch is an HTTP client with a disk cache. Responses are cached with
 // their ETag/Last-Modified validators so refreshes are cheap conditional
-// requests, and a stale copy is served when the network fails.
+// requests, transient failures are retried with backoff, and a stale copy is
+// served when the network fails. A body only replaces the cached copy once it
+// passes the caller's validation, so a bot-check page never evicts a good feed.
 package fetch
 
 import (
 	"context"
 	"crypto/sha256"
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
+	"math/rand/v2"
+	"net"
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -53,11 +60,26 @@ type Result struct {
 	Err       error
 }
 
+// Validator vets a fresh 200 body before it is cached and returned. A
+// rejected body is treated as a failed fetch: the stale copy, if any, is
+// served instead and stays in the cache.
+type Validator func(body []byte) error
+
+// maxRetryAfter is the longest Retry-After the client will wait out; a server
+// asking for more is treated as a hard failure for this fetch.
+const maxRetryAfter = 10 * time.Second
+
 // Client fetches URLs through the disk cache. It is safe for concurrent use;
 // concurrent Gets of the same URL share one request.
 type Client struct {
 	HTTP *http.Client
 	Dir  string // cache directory; empty disables the disk cache
+
+	// MaxRetries is how many times a transient failure (timeout, reset
+	// connection, 5xx, 408, 429) is retried. BaseDelay is the first backoff;
+	// each further retry waits three times longer, with jitter.
+	MaxRetries int
+	BaseDelay  time.Duration
 
 	mu       sync.Mutex
 	inflight map[string]*call
@@ -79,8 +101,10 @@ type meta struct {
 // New returns a Client caching under dir.
 func New(dir string) *Client {
 	return &Client{
-		HTTP: &http.Client{Timeout: 25 * time.Second},
-		Dir:  dir,
+		HTTP:       &http.Client{Timeout: 25 * time.Second},
+		Dir:        dir,
+		MaxRetries: 2,
+		BaseDelay:  500 * time.Millisecond,
 	}
 }
 
@@ -96,6 +120,13 @@ func DefaultDir() string {
 // Get returns the body for url. A cache entry younger than maxAge is returned
 // without touching the network; maxAge <= 0 always revalidates.
 func (c *Client) Get(ctx context.Context, url string, maxAge time.Duration) (Result, error) {
+	return c.GetValid(ctx, url, maxAge, nil)
+}
+
+// GetValid is Get with a validator for fresh bodies; validate may be nil.
+// Concurrent calls for the same URL share one request and the first
+// caller's validator.
+func (c *Client) GetValid(ctx context.Context, url string, maxAge time.Duration, validate Validator) (Result, error) {
 	c.mu.Lock()
 	if c.inflight == nil {
 		c.inflight = make(map[string]*call)
@@ -113,7 +144,7 @@ func (c *Client) Get(ctx context.Context, url string, maxAge time.Duration) (Res
 	c.inflight[url] = cl
 	c.mu.Unlock()
 
-	cl.res, cl.err = c.get(ctx, url, maxAge)
+	cl.res, cl.err = c.get(ctx, url, maxAge, validate)
 
 	c.mu.Lock()
 	delete(c.inflight, url)
@@ -122,13 +153,13 @@ func (c *Client) Get(ctx context.Context, url string, maxAge time.Duration) (Res
 	return cl.res, cl.err
 }
 
-func (c *Client) get(ctx context.Context, url string, maxAge time.Duration) (Result, error) {
+func (c *Client) get(ctx context.Context, url string, maxAge time.Duration, validate Validator) (Result, error) {
 	m, body, cached := c.load(url)
 	if cached && maxAge > 0 && time.Since(m.FetchedAt) < maxAge {
 		return Result{Body: body, Source: Cache, FetchedAt: m.FetchedAt}, nil
 	}
 
-	res, err := c.fetch(ctx, url, m, cached)
+	res, err := c.fetch(ctx, url, m, cached, validate)
 	if err != nil {
 		if cached {
 			return Result{Body: body, Source: Stale, FetchedAt: m.FetchedAt, Err: err}, nil
@@ -143,7 +174,115 @@ func (c *Client) get(ctx context.Context, url string, maxAge time.Duration) (Res
 	return res, nil
 }
 
-func (c *Client) fetch(ctx context.Context, url string, m meta, cached bool) (Result, error) {
+// fetch performs the request, retrying transient failures with backoff for
+// as long as ctx allows.
+func (c *Client) fetch(ctx context.Context, url string, m meta, cached bool, validate Validator) (Result, error) {
+	for attempt := 0; ; attempt++ {
+		res, err := c.fetchOnce(ctx, url, m, cached, validate)
+		if err == nil {
+			return res, nil
+		}
+		wait, ok := c.retryDelay(ctx, err, attempt)
+		if !ok {
+			return Result{}, err
+		}
+		if dl, has := ctx.Deadline(); has && time.Until(dl) < wait {
+			return Result{}, err // no time left for another attempt
+		}
+		t := time.NewTimer(wait)
+		select {
+		case <-ctx.Done():
+			t.Stop()
+			return Result{}, err
+		case <-t.C:
+		}
+	}
+}
+
+// statusError is a non-200 response.
+type statusError struct {
+	url        string
+	code       int
+	retryAfter time.Duration
+}
+
+func (e *statusError) Error() string {
+	// Not resp.Status: its reason phrase is server-controlled text that
+	// would end up on the user's screen.
+	return fmt.Sprintf("GET %s: %d %s", e.url, e.code, http.StatusText(e.code))
+}
+
+// permanentError is a failure that retrying cannot fix.
+type permanentError struct{ err error }
+
+func (e *permanentError) Error() string { return e.err.Error() }
+func (e *permanentError) Unwrap() error { return e.err }
+
+func (c *Client) retryDelay(ctx context.Context, err error, attempt int) (time.Duration, bool) {
+	if attempt >= c.MaxRetries || !retryable(ctx, err) {
+		return 0, false
+	}
+	var se *statusError
+	if errors.As(err, &se) && se.retryAfter > 0 {
+		if se.retryAfter > maxRetryAfter {
+			return 0, false
+		}
+		return se.retryAfter, true
+	}
+	d := c.BaseDelay
+	for range attempt {
+		d *= 3
+	}
+	return time.Duration(float64(d) * (0.75 + rand.Float64()/2)), true
+}
+
+func retryable(ctx context.Context, err error) bool {
+	if ctx.Err() != nil {
+		return false // the caller gave up, not the server
+	}
+	var (
+		perm     *permanentError
+		se       *statusError
+		certErr  *tls.CertificateVerificationError
+		unknown  x509.UnknownAuthorityError
+		invalid  x509.CertificateInvalidError
+		hostname x509.HostnameError
+		dnsErr   *net.DNSError
+	)
+	switch {
+	case errors.As(err, &perm):
+		return false
+	case errors.As(err, &se):
+		switch se.code {
+		case http.StatusRequestTimeout, http.StatusTooManyRequests,
+			http.StatusInternalServerError, http.StatusBadGateway,
+			http.StatusServiceUnavailable, http.StatusGatewayTimeout:
+			return true
+		}
+		return false
+	case errors.As(err, &certErr), errors.As(err, &unknown),
+		errors.As(err, &invalid), errors.As(err, &hostname):
+		return false // a bad certificate won't fix itself in a second
+	case errors.As(err, &dnsErr) && dnsErr.IsNotFound:
+		return false
+	}
+	return true // timeouts, resets, refused connections, truncated bodies
+}
+
+func parseRetryAfter(v string) time.Duration {
+	if v == "" {
+		return 0
+	}
+	if s, err := strconv.Atoi(v); err == nil && s >= 0 {
+		return time.Duration(s) * time.Second
+	}
+	if t, err := http.ParseTime(v); err == nil {
+		return max(0, time.Until(t))
+	}
+	return 0
+}
+
+func (c *Client) fetchOnce(ctx context.Context, url string, m meta, cached bool, validate Validator) (Result, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
 		return Result{}, err
@@ -169,9 +308,7 @@ func (c *Client) fetch(ctx context.Context, url string, m meta, cached bool) (Re
 		return Result{}, nil
 	}
 	if resp.StatusCode != http.StatusOK {
-		// Not resp.Status: its reason phrase is server-controlled text that
-		// would end up on the user's screen.
-		return Result{}, fmt.Errorf("GET %s: %d %s", url, resp.StatusCode, http.StatusText(resp.StatusCode))
+		return Result{}, &statusError{url: url, code: resp.StatusCode, retryAfter: parseRetryAfter(resp.Header.Get("Retry-After"))}
 	}
 
 	body, err := io.ReadAll(io.LimitReader(resp.Body, MaxBodySize+1))
@@ -179,7 +316,12 @@ func (c *Client) fetch(ctx context.Context, url string, m meta, cached bool) (Re
 		return Result{}, err
 	}
 	if len(body) > MaxBodySize {
-		return Result{}, fmt.Errorf("GET %s: response larger than %d MB", url, MaxBodySize>>20)
+		return Result{}, &permanentError{fmt.Errorf("GET %s: response larger than %d MB", url, MaxBodySize>>20)}
+	}
+	if validate != nil {
+		if err := validate(body); err != nil {
+			return Result{}, &permanentError{fmt.Errorf("GET %s: unusable response: %w", url, err)}
+		}
 	}
 
 	now := time.Now()

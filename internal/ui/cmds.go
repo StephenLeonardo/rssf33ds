@@ -2,6 +2,7 @@ package ui
 
 import (
 	"context"
+	"fmt"
 	"net/url"
 	"os/exec"
 	"runtime"
@@ -16,6 +17,7 @@ import (
 
 	"github.com/aelhadii/rssf33ds/internal/article"
 	"github.com/aelhadii/rssf33ds/internal/catalog"
+	"github.com/aelhadii/rssf33ds/internal/content"
 	"github.com/aelhadii/rssf33ds/internal/feed"
 	"github.com/aelhadii/rssf33ds/internal/fetch"
 	"github.com/aelhadii/rssf33ds/internal/search"
@@ -45,36 +47,68 @@ type renderedMsg struct {
 
 type statusMsg string
 
+// guard runs cmd, turning a panic into the message onPanic builds. Bubble
+// Tea's own recovery ends the program, so without this one malformed feed or
+// page would take the whole reader down instead of just itself.
+func guard(cmd tea.Cmd, onPanic func(error) tea.Msg) tea.Cmd {
+	return func() (msg tea.Msg) {
+		defer func() {
+			if r := recover(); r != nil {
+				msg = onPanic(fmt.Errorf("internal error: %v", r))
+			}
+		}()
+		return cmd()
+	}
+}
+
 // loadFeed fetches, parses and indexes one feed. sem bounds how many
 // fetches run at once so the startup prefetch does not open dozens of
 // connections.
 func loadFeed(c *fetch.Client, sem chan struct{}, f catalog.Feed, maxAge time.Duration) tea.Cmd {
-	return func() tea.Msg {
+	return guard(func() tea.Msg {
 		sem <- struct{}{}
 		defer func() { <-sem }()
 
 		ctx, cancel := context.WithTimeout(context.Background(), 40*time.Second)
 		defer cancel()
-		res, err := c.Get(ctx, f.URL, maxAge)
+		// Parsing doubles as validation, so a 200 that isn't a feed (a bot
+		// check, an error page) never replaces the cached copy.
+		var parsed *feed.Feed
+		res, err := c.GetValid(ctx, f.URL, maxAge, func(body []byte) error {
+			var err error
+			parsed, err = feed.Parse(body, f.URL)
+			return err
+		})
 		if err != nil {
 			return feedLoadedMsg{url: f.URL, err: err}
 		}
-		parsed, err := feed.Parse(res.Body, f.URL)
-		if err != nil {
-			return feedLoadedMsg{url: f.URL, res: res, err: err}
+		if parsed == nil {
+			// The validator didn't run on this body: it came from the cache,
+			// or from a concurrent caller's fetch of the same URL.
+			if parsed, err = feed.Parse(res.Body, f.URL); err != nil {
+				return feedLoadedMsg{url: f.URL, res: res, err: err}
+			}
 		}
 		return feedLoadedMsg{url: f.URL, feed: parsed, docs: search.Index(f.URL, f.Name, parsed), res: res}
-	}
+	}, func(err error) tea.Msg {
+		return feedLoadedMsg{url: f.URL, err: err}
+	})
 }
 
 // loadArticle resolves an article's body off the Update loop.
 func loadArticle(c *fetch.Client, a feed.Article) tea.Cmd {
-	return func() tea.Msg {
+	return guard(func() tea.Msg {
 		ctx, cancel := context.WithTimeout(context.Background(), 40*time.Second)
 		defer cancel()
 		r := article.Resolve(ctx, c, a)
 		return articleLoadedMsg{key: articleKey(a), md: r.Markdown, note: r.Note}
-	}
+	}, func(err error) tea.Msg {
+		return articleLoadedMsg{
+			key:  articleKey(a),
+			md:   "_This article couldn't be processed._",
+			note: "rssf33ds hit a bug reading this article (" + content.Sanitize(err.Error()) + "). Press o to open it in a browser.",
+		}
+	})
 }
 
 // header is the styled title block shown above the article body.
@@ -101,7 +135,7 @@ func header(a feed.Article, feedName, note string, width int) string {
 // render word-wraps the article to width with glamour. It runs as a command
 // because long articles take long enough to render to stall input.
 func render(a feed.Article, feedName, md, note, style string, width int) tea.Cmd {
-	return func() tea.Msg {
+	return guard(func() tea.Msg {
 		body, err := glamourRender(md, style, width)
 		if err != nil {
 			body = lipgloss.NewStyle().Width(width).PaddingLeft(2).Render(md)
@@ -111,7 +145,10 @@ func render(a feed.Article, feedName, md, note, style string, width int) tea.Cmd
 			width: width,
 			out:   header(a, feedName, note, width-4) + "\n" + strings.TrimRight(body, "\n") + "\n",
 		}
-	}
+	}, func(error) tea.Msg {
+		// Rendering failed: show the Markdown as plain wrapped text.
+		return renderedMsg{key: articleKey(a), width: width, out: lipgloss.NewStyle().Width(width).PaddingLeft(2).Render(a.Title + "\n\n" + md)}
+	})
 }
 
 func glamourRender(md, style string, width int) (string, error) {

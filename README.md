@@ -43,6 +43,8 @@ Built in Go with [Bubble Tea](https://github.com/charmbracelet/bubbletea),
 - **Cached and offline-friendly.** Responses are cached on disk and
   revalidated with ETag/Last-Modified. When the network is down you get the
   cached copy, flagged as offline.
+- **Resilient to flaky sites.** See [Reliability](#reliability): retries with
+  backoff, validation before caching, crash isolation and a bounded cache.
 - **Terminal-safe.** Escape sequences and control characters in feed content
   are stripped before display, so a hostile feed can't drive your terminal.
   Responses are size-capped and time-limited, and "open in browser" only
@@ -126,6 +128,28 @@ it loads.
 To add a feed, append it to [`internal/catalog/catalog.go`](internal/catalog/catalog.go)
 and run the verifier.
 
+## Reliability
+
+- **Retries with backoff.** Timeouts, reset connections, `5xx`, `408` and
+  `429` are retried twice, waiting 0.5 s then about 1.5 s (with jitter).
+  `Retry-After` is honoured up to 10 s. Retries stop at the request's
+  deadline. Certificate errors, unknown hosts and other `4xx` responses fail
+  immediately, since retrying won't fix them.
+- **Validation before caching.** A new response replaces the cached copy only
+  if it parses as a feed. A bot-check or error page served with `200 OK`
+  never evicts a good feed; you get the last good copy instead, flagged as
+  offline.
+- **Crash isolation.** Every background job (fetching, extraction,
+  rendering, search) recovers from panics. A malformed feed or page fails on
+  its own: the feed is skipped, or the article shows a note. The rest of the
+  app keeps running. Parsing, cleaning and search are fuzz-tested.
+- **Bounded cache.** At startup, entries not refreshed in 30 days are deleted,
+  then the oldest until the cache is under 200 MB, along with debris from
+  interrupted writes. Only files named like cache entries are touched, so a
+  custom `-cache` directory is safe.
+- **Failing feeds are skipped.** A feed that can't load and has nothing cached
+  drops out of the list until `r` loads it again.
+
 ## How it works
 
 ```
@@ -179,9 +203,14 @@ checker tells you. The exit status is 1 if any catalog feed is invalid.
 go test ./...                                   # unit tests
 go test -race ./...
 go test -tags live ./internal/ui -run Live -v   # end-to-end against the real feeds
+
+# fuzzing (seeds and past crashers live in testdata/fuzz)
+go test -run '^$' -fuzz '^FuzzParse$'      -fuzztime 60s ./internal/feed
+go test -run '^$' -fuzz '^FuzzToMarkdown$' -fuzztime 60s ./internal/content
+go test -run '^$' -fuzz '^FuzzSearch$'     -fuzztime 60s ./internal/search
 ```
 
-The unit tests cover parsing, clutter removal, sanitizing, caching, ranking
-and the UI state machine (navigation, filtering vs. back, dropping stale async
+The unit tests cover parsing, clutter removal, sanitizing, caching, retries,
+cache pruning, panic recovery, ranking and the UI state machine (navigation, filtering vs. back, dropping stale async
 results, wrapping and resize). The `live` tests drive the real model against
 the network and print the rendered screens.

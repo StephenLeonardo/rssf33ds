@@ -80,6 +80,12 @@ func main() {
 			defer wg.Done()
 			sem <- struct{}{}
 			defer func() { <-sem }()
+			defer func() {
+				if r := recover(); r != nil {
+					results[i] = invalid(Finding{Entity: j.f.URL, Name: j.f.Name, Role: j.role, Source: Source{Kind: "http+parse"}},
+						fmt.Errorf("internal error: %v", r))
+				}
+			}()
 			results[i] = probe(client, j.f, j.role, *withContent)
 		}()
 	}

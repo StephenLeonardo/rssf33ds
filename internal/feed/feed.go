@@ -122,8 +122,8 @@ func resolve(base *url.URL, ref string) string {
 	if base != nil {
 		u = base.ResolveReference(u)
 	}
-	if u.Scheme != "http" && u.Scheme != "https" {
-		return "" // GUIDs like "urn:uuid:..." or tag: URIs are not links
+	if (u.Scheme != "http" && u.Scheme != "https") || u.Host == "" {
+		return "" // GUIDs like "urn:uuid:..." or tag: URIs, or no host at all
 	}
 	return u.String()
 }

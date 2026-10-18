@@ -34,9 +34,14 @@ func main() {
 		}
 	}
 
+	client := fetch.New(*cacheDir)
+	// Keep the cache bounded. It runs alongside startup: anything it races
+	// with is at worst re-fetched.
+	go client.Prune(fetch.PruneAge, fetch.PruneBytes) //nolint:errcheck // best effort
+
 	m := ui.New(ui.Options{
 		Feeds:    catalog.Feeds,
-		Client:   fetch.New(*cacheDir),
+		Client:   client,
 		Style:    *style,
 		Prefetch: !*noPrefetch,
 	})
