@@ -1,0 +1,11 @@
+# Build output
+/rssf33ds
+/dist/
+*.exe
+*.test
+*.out
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,1526 @@
+{
+  "runs": [
+    {
+      "id": "1fe4bd886d87",
+      "stage": "graph",
+      "started": "2026-10-18T01:46:14.654785Z",
+      "tool": "cmd/verifyfeeds"
+    },
+    {
+      "id": "b6ecb3cc5ab3",
+      "stage": "graph",
+      "started": "2026-10-18T01:53:17.532839Z",
+      "tool": "cmd/verifyfeeds"
+    }
+  ],
+  "findings": [
+    {
+      "id": "8610770b8b05",
+      "entity": "https://netflixtechblog.com/feed",
+      "name": "Netflix TechBlog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-16; newest article 19091 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-16T16:01:02Z",
+        "content_runes": 19091,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162212Z"
+    },
+    {
+      "id": "4d540e8b93f9",
+      "entity": "https://blog.cloudflare.com/rss/",
+      "name": "Cloudflare Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "20 entries, newest 2026-10-16; newest article 6497 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 20,
+        "newest": "2026-10-16T13:00:00Z",
+        "content_runes": 6497,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162306Z"
+    },
+    {
+      "id": "aa27dd3f1c8f",
+      "entity": "https://aws.amazon.com/blogs/architecture/feed/",
+      "name": "AWS Architecture Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "20 entries, newest 2026-10-15; newest article 22347 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 20,
+        "newest": "2026-10-15T15:50:31Z",
+        "content_runes": 22347,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162332Z"
+    },
+    {
+      "id": "1328d54d1066",
+      "entity": "https://stripe.com/blog/feed.rss",
+      "name": "Stripe Blog",
+      "role": "catalog",
+      "status": "invalid",
+      "claim": "Get \"https://stripe.com/blog/feed.rss\": tls: failed to verify certificate: x509: “DigiCert TLS ECC P384 Root G5” certificate is revoked",
+      "source": {
+        "kind": "http+parse",
+        "error": "Get \"https://stripe.com/blog/feed.rss\": tls: failed to verify certificate: x509: “DigiCert TLS ECC P384 Root G5” certificate is revoked",
+        "items": 0
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162339Z"
+    },
+    {
+      "id": "459b7a06180c",
+      "entity": "https://stripe.dev/feed",
+      "name": "Stripe Dev Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "123 entries, newest 2026-10-13; newest article 10015 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 123,
+        "newest": "2026-10-13T00:00:00Z",
+        "content_runes": 10015,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162345Z"
+    },
+    {
+      "id": "3792fe8fa160",
+      "entity": "https://www.datadoghq.com/blog/engineering/index.xml",
+      "name": "Datadog Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "100 entries, newest 2026-10-01; newest article 18136 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 100,
+        "newest": "2026-10-01T00:00:00Z",
+        "content_runes": 18136,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162351Z"
+    },
+    {
+      "id": "18e08eb623fc",
+      "entity": "https://engineering.fb.com/feed/",
+      "name": "Meta Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "9 entries, newest 2026-10-15; newest article 11277 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 9,
+        "newest": "2026-10-15T19:00:03Z",
+        "content_runes": 11277,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162356Z"
+    },
+    {
+      "id": "cdd2269c4404",
+      "entity": "https://discord.com/blog/rss.xml",
+      "name": "Discord Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "100 entries, newest 2026-10-06; newest article 24754 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 100,
+        "newest": "2026-10-06T00:00:00Z",
+        "content_runes": 24754,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162362Z"
+    },
+    {
+      "id": "e08397795ab6",
+      "entity": "https://slack.engineering/feed/",
+      "name": "Slack Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "8 entries, newest 2026-07-14; newest article 20201 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 8,
+        "newest": "2026-07-14T16:10:08Z",
+        "content_runes": 20201,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162368Z"
+    },
+    {
+      "id": "1db44c7f120f",
+      "entity": "https://dropbox.tech/feed",
+      "name": "Dropbox Tech",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-09-29; newest article 9718 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-09-29T13:00:00Z",
+        "content_runes": 9718,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162373Z"
+    },
+    {
+      "id": "4fd48a3e2d6c",
+      "entity": "https://engineering.atspotify.com/feed/",
+      "name": "Spotify Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "5 entries, newest 2026-10-16; newest article 10807 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 5,
+        "newest": "2026-10-16T14:29:18Z",
+        "content_runes": 10807,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162379Z"
+    },
+    {
+      "id": "a62a987a604f",
+      "entity": "https://github.blog/engineering/feed/",
+      "name": "GitHub Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-15; newest article 10388 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-15T18:00:00Z",
+        "content_runes": 10388,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162385Z"
+    },
+    {
+      "id": "6741a3599bf5",
+      "entity": "https://medium.com/feed/airbnb-engineering",
+      "name": "Airbnb Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-13; newest article 9655 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-13T17:01:02Z",
+        "content_runes": 9655,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.16239Z"
+    },
+    {
+      "id": "d7f01a843d72",
+      "entity": "https://medium.com/feed/pinterest-engineering",
+      "name": "Pinterest Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-09; newest article 22124 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-09T15:01:02Z",
+        "content_runes": 22124,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162396Z"
+    },
+    {
+      "id": "003b8f118f2e",
+      "entity": "https://shopify.engineering/blog.atom",
+      "name": "Shopify Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "432 entries, newest 2026-10-01; newest article 8720 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 432,
+        "newest": "2026-10-01T16:23:24Z",
+        "content_runes": 8720,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162402Z"
+    },
+    {
+      "id": "481a1611272b",
+      "entity": "https://eng.lyft.com/feed",
+      "name": "Lyft Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-09-10; newest article 17084 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-09-10T16:12:28Z",
+        "content_runes": 17084,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162407Z"
+    },
+    {
+      "id": "87952ae89254",
+      "entity": "https://engineering.grab.com/feed.xml",
+      "name": "Grab Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-13; newest article 7443 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-13T00:23:00Z",
+        "content_runes": 7443,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162413Z"
+    },
+    {
+      "id": "b4de32b9ea27",
+      "entity": "https://engineering.zalando.com/atom.xml",
+      "name": "Zalando Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "100 entries, newest 2026-10-11; newest article 21378 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 100,
+        "newest": "2026-10-11T22:00:00Z",
+        "content_runes": 21378,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162418Z"
+    },
+    {
+      "id": "c5ae7f1c1fdc",
+      "entity": "https://engineering.salesforce.com/feed/",
+      "name": "Salesforce Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-08; newest article 11381 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-08T15:15:37Z",
+        "content_runes": 11381,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162424Z"
+    },
+    {
+      "id": "769727dda9d5",
+      "entity": "https://fly.io/blog/feed.xml",
+      "name": "Fly.io Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "40 entries, newest 2026-09-03; newest article 5863 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 40,
+        "newest": "2026-09-03T00:00:00Z",
+        "content_runes": 5863,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162429Z"
+    },
+    {
+      "id": "9506a637221e",
+      "entity": "https://planetscale.com/blog/rss.xml",
+      "name": "PlanetScale Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "25 entries, newest 2026-10-14; newest article 17667 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 25,
+        "newest": "2026-10-14T00:00:00Z",
+        "content_runes": 17667,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162435Z"
+    },
+    {
+      "id": "387b5db097fa",
+      "entity": "https://tailscale.com/blog/index.xml",
+      "name": "Tailscale Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "15 entries, newest 2026-10-16; newest article 12493 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 15,
+        "newest": "2026-10-16T14:00:00Z",
+        "content_runes": 12493,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.16244Z"
+    },
+    {
+      "id": "5903a6f0a5f9",
+      "entity": "https://www.honeycomb.io/feed",
+      "name": "Honeycomb Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "50 entries, newest 2026-10-16; newest article 13530 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 50,
+        "newest": "2026-10-16T14:26:42Z",
+        "content_runes": 13530,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162446Z"
+    },
+    {
+      "id": "a77073ea0676",
+      "entity": "https://www.confluent.io/rss.xml",
+      "name": "Confluent Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-01; newest article 7136 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-01T13:31:07Z",
+        "content_runes": 7136,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162452Z"
+    },
+    {
+      "id": "3c058b79f6ca",
+      "entity": "https://blog.janestreet.com/feed.xml",
+      "name": "Jane Street Tech Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "100 entries, newest 2026-10-13; newest article 16958 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 100,
+        "newest": "2026-10-13T00:00:00Z",
+        "content_runes": 16958,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162457Z"
+    },
+    {
+      "id": "81a6a5731416",
+      "entity": "https://martinfowler.com/feed.atom",
+      "name": "Martin Fowler",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "30 entries, newest 2026-10-15; newest article 17475 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 30,
+        "newest": "2026-10-15T13:25:00Z",
+        "content_runes": 17475,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162463Z"
+    },
+    {
+      "id": "a9597979bd71",
+      "entity": "https://www.allthingsdistributed.com/atom.xml",
+      "name": "All Things Distributed (Werner Vogels)",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-09-08; newest article 5671 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-09-08T14:00:00Z",
+        "content_runes": 5671,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162468Z"
+    },
+    {
+      "id": "b5458eeac4a6",
+      "entity": "https://brooker.co.za/blog/rss.xml",
+      "name": "Marc Brooker",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "165 entries, newest 2026-10-04; newest article 4953 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 165,
+        "newest": "2026-10-04T00:00:00Z",
+        "content_runes": 4953,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162474Z"
+    },
+    {
+      "id": "d5b30daa0684",
+      "entity": "https://www.brendangregg.com/blog/rss.xml",
+      "name": "Brendan Gregg",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-02-06; newest article 7774 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-02-06T13:00:00Z",
+        "content_runes": 7774,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.16248Z"
+    },
+    {
+      "id": "2007b7aa6c91",
+      "entity": "https://muratbuffalo.blogspot.com/feeds/posts/default",
+      "name": "Metadata (Murat Demirbas)",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "25 entries, newest 2026-10-11; newest article 7508 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 25,
+        "newest": "2026-10-11T01:37:26.362Z",
+        "content_runes": 7508,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162485Z"
+    },
+    {
+      "id": "62f73200ed4a",
+      "entity": "https://jepsen.io/blog.rss",
+      "name": "Jepsen",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "32 entries, newest 2026-09-22; newest article 450 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 32,
+        "newest": "2026-09-22T00:00:00Z",
+        "content_runes": 450,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162491Z"
+    },
+    {
+      "id": "7957ad4940d4",
+      "entity": "https://aphyr.com/posts.atom",
+      "name": "Aphyr",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "12 entries, newest 2026-06-12; newest article 2420 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 12,
+        "newest": "2026-06-12T14:19:34Z",
+        "content_runes": 2420,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162496Z"
+    },
+    {
+      "id": "6be2b35db4c9",
+      "entity": "https://danluu.com/atom.xml",
+      "name": "Dan Luu",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "128 entries, newest 2026-09-18; newest article 17628 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 128,
+        "newest": "2026-09-18T00:00:00Z",
+        "content_runes": 17628,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162527Z"
+    },
+    {
+      "id": "9a46a58ae57e",
+      "entity": "https://highscalability.com/rss/",
+      "name": "High Scalability",
+      "role": "catalog",
+      "status": "stale",
+      "claim": "15 entries, newest 2024-05-09; newest article 23274 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 15,
+        "newest": "2024-05-09T18:55:21Z",
+        "content_runes": 23274,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162532Z"
+    },
+    {
+      "id": "015198f38253",
+      "entity": "https://newsletter.pragmaticengineer.com/feed",
+      "name": "The Pragmatic Engineer",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "20 entries, newest 2026-10-15; newest article 544 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 20,
+        "newest": "2026-10-15T16:55:18Z",
+        "content_runes": 544,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162536Z"
+    },
+    {
+      "id": "b5a017e8bb81",
+      "entity": "https://blog.bytebytego.com/feed",
+      "name": "ByteByteGo",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "20 entries, newest 2026-10-17; newest article 4890 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 20,
+        "newest": "2026-10-17T15:30:51Z",
+        "content_runes": 4890,
+        "content_origin": "feed"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.16254Z"
+    },
+    {
+      "id": "bb89e5a1bcf8",
+      "entity": "https://www.infoq.com/feed/architecture-design/",
+      "name": "InfoQ Architecture \u0026 Design",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "15 entries, newest 2026-10-17; newest article 4285 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 15,
+        "newest": "2026-10-17T06:00:00Z",
+        "content_runes": 4285,
+        "content_origin": "page"
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162544Z"
+    },
+    {
+      "id": "dd14e073e17d",
+      "entity": "https://www.uber.com/blog/engineering/rss/",
+      "name": "Uber Engineering",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://www.uber.com/blog/engineering/rss/: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://www.uber.com/blog/engineering/rss/: 404 Not Found",
+        "items": 0
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162548Z"
+    },
+    {
+      "id": "2d603763b0c1",
+      "entity": "https://eng.uber.com/feed/",
+      "name": "Uber Engineering (legacy)",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://eng.uber.com/feed/: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://eng.uber.com/feed/: 404 Not Found",
+        "items": 0
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162552Z"
+    },
+    {
+      "id": "57018dad3671",
+      "entity": "https://www.uber.com/us/en/blog/feed/",
+      "name": "Uber Blog (us/en)",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://www.uber.com/us/en/blog/feed/: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://www.uber.com/us/en/blog/feed/: 404 Not Found",
+        "items": 0
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162556Z"
+    },
+    {
+      "id": "25cf654c4e68",
+      "entity": "https://engineering.linkedin.com/blog.rss.html",
+      "name": "LinkedIn Engineering",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://engineering.linkedin.com/blog.rss.html: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://engineering.linkedin.com/blog.rss.html: 404 Not Found",
+        "items": 0
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.16256Z"
+    },
+    {
+      "id": "26e0901708b1",
+      "entity": "https://careersatdoordash.com/feed/",
+      "name": "DoorDash Engineering",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://careersatdoordash.com/feed/: 403 Forbidden",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://careersatdoordash.com/feed/: 403 Forbidden",
+        "items": 0
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162564Z"
+    },
+    {
+      "id": "45b7e046fb8e",
+      "entity": "https://blog.twitter.com/engineering/en_us/blog.rss",
+      "name": "Twitter/X Engineering",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://blog.twitter.com/engineering/en_us/blog.rss: 403 Forbidden",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://blog.twitter.com/engineering/en_us/blog.rss: 403 Forbidden",
+        "items": 0
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162569Z"
+    },
+    {
+      "id": "133e7113efe6",
+      "entity": "https://www.cockroachlabs.com/blog/index.xml",
+      "name": "CockroachDB Blog",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://www.cockroachlabs.com/blog/index.xml: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://www.cockroachlabs.com/blog/index.xml: 404 Not Found",
+        "items": 0
+      },
+      "run_id": "1fe4bd886d87",
+      "at": "2026-10-18T01:46:21.162573Z"
+    },
+    {
+      "id": "69bc6059d120",
+      "entity": "https://netflixtechblog.com/feed",
+      "name": "Netflix TechBlog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-16; newest article 19151 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-16T16:01:02Z",
+        "content_runes": 19151,
+        "content_origin": "feed"
+      },
+      "supersedes": "8610770b8b05",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213139Z"
+    },
+    {
+      "id": "264ee4145f97",
+      "entity": "https://blog.cloudflare.com/rss/",
+      "name": "Cloudflare Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "20 entries, newest 2026-10-16; newest article 6497 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 20,
+        "newest": "2026-10-16T13:00:00Z",
+        "content_runes": 6497,
+        "content_origin": "feed"
+      },
+      "supersedes": "4d540e8b93f9",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213148Z"
+    },
+    {
+      "id": "80a469b023fd",
+      "entity": "https://aws.amazon.com/blogs/architecture/feed/",
+      "name": "AWS Architecture Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "20 entries, newest 2026-10-15; newest article 22347 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 20,
+        "newest": "2026-10-15T15:50:31Z",
+        "content_runes": 22347,
+        "content_origin": "feed"
+      },
+      "supersedes": "aa27dd3f1c8f",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213151Z"
+    },
+    {
+      "id": "6daa975a1577",
+      "entity": "https://stripe.com/blog/feed.rss",
+      "name": "Stripe Blog",
+      "role": "catalog",
+      "status": "invalid",
+      "claim": "Get \"https://stripe.com/blog/feed.rss\": tls: failed to verify certificate: x509: “DigiCert TLS ECC P384 Root G5” certificate is revoked",
+      "source": {
+        "kind": "http+parse",
+        "error": "Get \"https://stripe.com/blog/feed.rss\": tls: failed to verify certificate: x509: “DigiCert TLS ECC P384 Root G5” certificate is revoked",
+        "items": 0
+      },
+      "supersedes": "1328d54d1066",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213216Z"
+    },
+    {
+      "id": "34bc566779f2",
+      "entity": "https://stripe.dev/feed",
+      "name": "Stripe Dev Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "123 entries, newest 2026-10-13; newest article 10015 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 123,
+        "newest": "2026-10-13T00:00:00Z",
+        "content_runes": 10015,
+        "content_origin": "feed"
+      },
+      "supersedes": "459b7a06180c",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213223Z"
+    },
+    {
+      "id": "0593172729ba",
+      "entity": "https://www.datadoghq.com/blog/engineering/index.xml",
+      "name": "Datadog Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "100 entries, newest 2026-10-01; newest article 18136 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 100,
+        "newest": "2026-10-01T00:00:00Z",
+        "content_runes": 18136,
+        "content_origin": "page"
+      },
+      "supersedes": "3792fe8fa160",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213225Z"
+    },
+    {
+      "id": "21a66771b4d3",
+      "entity": "https://engineering.fb.com/feed/",
+      "name": "Meta Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "9 entries, newest 2026-10-15; newest article 11277 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 9,
+        "newest": "2026-10-15T19:00:03Z",
+        "content_runes": 11277,
+        "content_origin": "feed"
+      },
+      "supersedes": "18e08eb623fc",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213228Z"
+    },
+    {
+      "id": "c4b353740c9f",
+      "entity": "https://discord.com/blog/rss.xml",
+      "name": "Discord Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "100 entries, newest 2026-10-06; newest article 24754 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 100,
+        "newest": "2026-10-06T00:00:00Z",
+        "content_runes": 24754,
+        "content_origin": "page"
+      },
+      "supersedes": "cdd2269c4404",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213231Z"
+    },
+    {
+      "id": "415e9160577e",
+      "entity": "https://slack.engineering/feed/",
+      "name": "Slack Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "8 entries, newest 2026-07-14; newest article 20201 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 8,
+        "newest": "2026-07-14T16:10:08Z",
+        "content_runes": 20201,
+        "content_origin": "feed"
+      },
+      "supersedes": "e08397795ab6",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213233Z"
+    },
+    {
+      "id": "b1b8131f3f8f",
+      "entity": "https://dropbox.tech/feed",
+      "name": "Dropbox Tech",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-09-29; newest article 9718 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-09-29T13:00:00Z",
+        "content_runes": 9718,
+        "content_origin": "feed"
+      },
+      "supersedes": "1db44c7f120f",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213235Z"
+    },
+    {
+      "id": "83b488180c11",
+      "entity": "https://engineering.atspotify.com/feed/",
+      "name": "Spotify Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "5 entries, newest 2026-10-16; newest article 10857 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 5,
+        "newest": "2026-10-16T14:29:18Z",
+        "content_runes": 10857,
+        "content_origin": "page"
+      },
+      "supersedes": "4fd48a3e2d6c",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213237Z"
+    },
+    {
+      "id": "8099a20c9e9d",
+      "entity": "https://github.blog/engineering/feed/",
+      "name": "GitHub Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-15; newest article 10388 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-15T18:00:00Z",
+        "content_runes": 10388,
+        "content_origin": "feed"
+      },
+      "supersedes": "a62a987a604f",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213239Z"
+    },
+    {
+      "id": "f97d045ae9f6",
+      "entity": "https://medium.com/feed/airbnb-engineering",
+      "name": "Airbnb Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-13; newest article 9679 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-13T17:01:02Z",
+        "content_runes": 9679,
+        "content_origin": "feed"
+      },
+      "supersedes": "6741a3599bf5",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213242Z"
+    },
+    {
+      "id": "c794e5e4afb5",
+      "entity": "https://medium.com/feed/pinterest-engineering",
+      "name": "Pinterest Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-09; newest article 22154 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-09T15:01:02Z",
+        "content_runes": 22154,
+        "content_origin": "feed"
+      },
+      "supersedes": "d7f01a843d72",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213244Z"
+    },
+    {
+      "id": "67ef9e7d5e8e",
+      "entity": "https://shopify.engineering/blog.atom",
+      "name": "Shopify Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "432 entries, newest 2026-10-01; newest article 8720 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 432,
+        "newest": "2026-10-01T16:23:24Z",
+        "content_runes": 8720,
+        "content_origin": "page"
+      },
+      "supersedes": "003b8f118f2e",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213246Z"
+    },
+    {
+      "id": "71ab3a025b99",
+      "entity": "https://eng.lyft.com/feed",
+      "name": "Lyft Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-09-10; newest article 17098 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-09-10T16:12:28Z",
+        "content_runes": 17098,
+        "content_origin": "feed"
+      },
+      "supersedes": "481a1611272b",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213248Z"
+    },
+    {
+      "id": "7004226ae7d7",
+      "entity": "https://engineering.grab.com/feed.xml",
+      "name": "Grab Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-13; newest article 7443 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-13T00:23:00Z",
+        "content_runes": 7443,
+        "content_origin": "feed"
+      },
+      "supersedes": "87952ae89254",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213251Z"
+    },
+    {
+      "id": "6f694909d35d",
+      "entity": "https://engineering.zalando.com/atom.xml",
+      "name": "Zalando Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "100 entries, newest 2026-10-11; newest article 21378 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 100,
+        "newest": "2026-10-11T22:00:00Z",
+        "content_runes": 21378,
+        "content_origin": "feed"
+      },
+      "supersedes": "b4de32b9ea27",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213253Z"
+    },
+    {
+      "id": "253c177da3be",
+      "entity": "https://engineering.salesforce.com/feed/",
+      "name": "Salesforce Engineering",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-08; newest article 11381 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-08T15:15:37Z",
+        "content_runes": 11381,
+        "content_origin": "feed"
+      },
+      "supersedes": "c5ae7f1c1fdc",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213255Z"
+    },
+    {
+      "id": "85a2c339e96d",
+      "entity": "https://fly.io/blog/feed.xml",
+      "name": "Fly.io Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "40 entries, newest 2026-09-03; newest article 5863 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 40,
+        "newest": "2026-09-03T00:00:00Z",
+        "content_runes": 5863,
+        "content_origin": "feed"
+      },
+      "supersedes": "769727dda9d5",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213258Z"
+    },
+    {
+      "id": "b264124d8ffc",
+      "entity": "https://planetscale.com/blog/rss.xml",
+      "name": "PlanetScale Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "25 entries, newest 2026-10-14; newest article 17667 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 25,
+        "newest": "2026-10-14T00:00:00Z",
+        "content_runes": 17667,
+        "content_origin": "feed"
+      },
+      "supersedes": "9506a637221e",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.21326Z"
+    },
+    {
+      "id": "16c41867abb8",
+      "entity": "https://tailscale.com/blog/index.xml",
+      "name": "Tailscale Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "15 entries, newest 2026-10-16; newest article 12503 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 15,
+        "newest": "2026-10-16T14:00:00Z",
+        "content_runes": 12503,
+        "content_origin": "page"
+      },
+      "supersedes": "387b5db097fa",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213268Z"
+    },
+    {
+      "id": "1d857efba34e",
+      "entity": "https://www.honeycomb.io/feed",
+      "name": "Honeycomb Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "50 entries, newest 2026-10-16; newest article 13530 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 50,
+        "newest": "2026-10-16T14:26:42Z",
+        "content_runes": 13530,
+        "content_origin": "page"
+      },
+      "supersedes": "5903a6f0a5f9",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213271Z"
+    },
+    {
+      "id": "ab153d2f1503",
+      "entity": "https://www.confluent.io/rss.xml",
+      "name": "Confluent Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-10-01; newest article 7136 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-10-01T13:31:07Z",
+        "content_runes": 7136,
+        "content_origin": "page"
+      },
+      "supersedes": "a77073ea0676",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213273Z"
+    },
+    {
+      "id": "8de97fceba82",
+      "entity": "https://blog.janestreet.com/feed.xml",
+      "name": "Jane Street Tech Blog",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "100 entries, newest 2026-10-13; newest article 16958 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 100,
+        "newest": "2026-10-13T00:00:00Z",
+        "content_runes": 16958,
+        "content_origin": "page"
+      },
+      "supersedes": "3c058b79f6ca",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213275Z"
+    },
+    {
+      "id": "18f28ddbad0a",
+      "entity": "https://martinfowler.com/feed.atom",
+      "name": "Martin Fowler",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "30 entries, newest 2026-10-15; newest article 17475 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 30,
+        "newest": "2026-10-15T13:25:00Z",
+        "content_runes": 17475,
+        "content_origin": "page"
+      },
+      "supersedes": "81a6a5731416",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213277Z"
+    },
+    {
+      "id": "667c546ab03c",
+      "entity": "https://www.allthingsdistributed.com/atom.xml",
+      "name": "All Things Distributed (Werner Vogels)",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-09-08; newest article 5691 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-09-08T14:00:00Z",
+        "content_runes": 5691,
+        "content_origin": "page"
+      },
+      "supersedes": "a9597979bd71",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213279Z"
+    },
+    {
+      "id": "5f4625f0beb1",
+      "entity": "https://brooker.co.za/blog/rss.xml",
+      "name": "Marc Brooker",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "165 entries, newest 2026-10-04; newest article 4913 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 165,
+        "newest": "2026-10-04T00:00:00Z",
+        "content_runes": 4913,
+        "content_origin": "feed"
+      },
+      "supersedes": "b5458eeac4a6",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213285Z"
+    },
+    {
+      "id": "e9f3edd4529a",
+      "entity": "https://www.brendangregg.com/blog/rss.xml",
+      "name": "Brendan Gregg",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "10 entries, newest 2026-02-06; newest article 7774 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 10,
+        "newest": "2026-02-06T13:00:00Z",
+        "content_runes": 7774,
+        "content_origin": "feed"
+      },
+      "supersedes": "d5b30daa0684",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213288Z"
+    },
+    {
+      "id": "cc0fa68a2226",
+      "entity": "https://muratbuffalo.blogspot.com/feeds/posts/default",
+      "name": "Metadata (Murat Demirbas)",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "25 entries, newest 2026-10-11; newest article 7508 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 25,
+        "newest": "2026-10-11T01:37:26.362Z",
+        "content_runes": 7508,
+        "content_origin": "feed"
+      },
+      "supersedes": "2007b7aa6c91",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.21329Z"
+    },
+    {
+      "id": "78d58b3e7c79",
+      "entity": "https://jepsen.io/blog.rss",
+      "name": "Jepsen",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "32 entries, newest 2026-09-22; newest article 406 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 32,
+        "newest": "2026-09-22T00:00:00Z",
+        "content_runes": 406,
+        "content_origin": "page"
+      },
+      "supersedes": "62f73200ed4a",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213292Z"
+    },
+    {
+      "id": "6c3c48f399b1",
+      "entity": "https://aphyr.com/posts.atom",
+      "name": "Aphyr",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "12 entries, newest 2026-06-12; newest article 2420 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 12,
+        "newest": "2026-06-12T14:19:34Z",
+        "content_runes": 2420,
+        "content_origin": "feed"
+      },
+      "supersedes": "7957ad4940d4",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213295Z"
+    },
+    {
+      "id": "5beb997dee5c",
+      "entity": "https://danluu.com/atom.xml",
+      "name": "Dan Luu",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "128 entries, newest 2026-09-18; newest article 17628 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 128,
+        "newest": "2026-09-18T00:00:00Z",
+        "content_runes": 17628,
+        "content_origin": "feed"
+      },
+      "supersedes": "6be2b35db4c9",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213297Z"
+    },
+    {
+      "id": "6f9152074bc9",
+      "entity": "https://highscalability.com/rss/",
+      "name": "High Scalability",
+      "role": "catalog",
+      "status": "stale",
+      "claim": "15 entries, newest 2024-05-09; newest article 23274 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 15,
+        "newest": "2024-05-09T18:55:21Z",
+        "content_runes": 23274,
+        "content_origin": "feed"
+      },
+      "supersedes": "9a46a58ae57e",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213299Z"
+    },
+    {
+      "id": "3238d5b82b6d",
+      "entity": "https://newsletter.pragmaticengineer.com/feed",
+      "name": "The Pragmatic Engineer",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "20 entries, newest 2026-10-15; newest article 544 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 20,
+        "newest": "2026-10-15T16:55:18Z",
+        "content_runes": 544,
+        "content_origin": "page"
+      },
+      "supersedes": "015198f38253",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213302Z"
+    },
+    {
+      "id": "246536e945bc",
+      "entity": "https://blog.bytebytego.com/feed",
+      "name": "ByteByteGo",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "20 entries, newest 2026-10-17; newest article 4890 runes from feed",
+      "source": {
+        "kind": "http+parse",
+        "items": 20,
+        "newest": "2026-10-17T15:30:51Z",
+        "content_runes": 4890,
+        "content_origin": "feed"
+      },
+      "supersedes": "b5a017e8bb81",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213304Z"
+    },
+    {
+      "id": "db1968704ffd",
+      "entity": "https://www.infoq.com/feed/architecture-design/",
+      "name": "InfoQ Architecture \u0026 Design",
+      "role": "catalog",
+      "status": "valid",
+      "claim": "15 entries, newest 2026-10-17; newest article 4285 runes from page",
+      "source": {
+        "kind": "http+parse",
+        "items": 15,
+        "newest": "2026-10-17T06:00:00Z",
+        "content_runes": 4285,
+        "content_origin": "page"
+      },
+      "supersedes": "bb89e5a1bcf8",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213306Z"
+    },
+    {
+      "id": "ba81b5dbd54a",
+      "entity": "https://www.uber.com/blog/engineering/rss/",
+      "name": "Uber Engineering",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://www.uber.com/blog/engineering/rss/: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://www.uber.com/blog/engineering/rss/: 404 Not Found",
+        "items": 0
+      },
+      "supersedes": "dd14e073e17d",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213313Z"
+    },
+    {
+      "id": "7834a7005bf1",
+      "entity": "https://eng.uber.com/feed/",
+      "name": "Uber Engineering (legacy)",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://eng.uber.com/feed/: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://eng.uber.com/feed/: 404 Not Found",
+        "items": 0
+      },
+      "supersedes": "2d603763b0c1",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213315Z"
+    },
+    {
+      "id": "cc12bde91959",
+      "entity": "https://www.uber.com/us/en/blog/feed/",
+      "name": "Uber Blog (us/en)",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://www.uber.com/us/en/blog/feed/: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://www.uber.com/us/en/blog/feed/: 404 Not Found",
+        "items": 0
+      },
+      "supersedes": "57018dad3671",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213317Z"
+    },
+    {
+      "id": "cfac7698c66f",
+      "entity": "https://engineering.linkedin.com/blog.rss.html",
+      "name": "LinkedIn Engineering",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://engineering.linkedin.com/blog.rss.html: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://engineering.linkedin.com/blog.rss.html: 404 Not Found",
+        "items": 0
+      },
+      "supersedes": "25cf654c4e68",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213319Z"
+    },
+    {
+      "id": "9d9217add51e",
+      "entity": "https://careersatdoordash.com/feed/",
+      "name": "DoorDash Engineering",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://careersatdoordash.com/feed/: 403 Forbidden",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://careersatdoordash.com/feed/: 403 Forbidden",
+        "items": 0
+      },
+      "supersedes": "26e0901708b1",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213322Z"
+    },
+    {
+      "id": "0c73a230a074",
+      "entity": "https://blog.twitter.com/engineering/en_us/blog.rss",
+      "name": "Twitter/X Engineering",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://blog.twitter.com/engineering/en_us/blog.rss: 403 Forbidden",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://blog.twitter.com/engineering/en_us/blog.rss: 403 Forbidden",
+        "items": 0
+      },
+      "supersedes": "45b7e046fb8e",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213325Z"
+    },
+    {
+      "id": "83c5f83608f4",
+      "entity": "https://www.cockroachlabs.com/blog/index.xml",
+      "name": "CockroachDB Blog",
+      "role": "candidate",
+      "status": "invalid",
+      "claim": "GET https://www.cockroachlabs.com/blog/index.xml: 404 Not Found",
+      "source": {
+        "kind": "http+parse",
+        "error": "GET https://www.cockroachlabs.com/blog/index.xml: 404 Not Found",
+        "items": 0
+      },
+      "supersedes": "133e7113efe6",
+      "run_id": "b6ecb3cc5ab3",
+      "at": "2026-10-18T01:53:23.213328Z"
+    }
+  ]
+}
