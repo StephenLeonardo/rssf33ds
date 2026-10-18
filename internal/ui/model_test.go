@@ -210,23 +210,60 @@ func TestReaderWrapsAndScrolls(t *testing.T) {
 	}
 }
 
-func TestFeedErrorAndStaleStatus(t *testing.T) {
+func feedNames(m Model) []string {
+	var out []string
+	for _, it := range m.feeds.Items() {
+		out = append(out, it.(feedItem).f.Name)
+	}
+	return out
+}
+
+func TestFailedFeedsAreSkipped(t *testing.T) {
 	m := newTestModel(t)
-	m, _ = send(t, m, feedLoadedMsg{url: testFeeds[1].URL, err: errString("GET: 403 Forbidden")})
-	it := m.feeds.Items()[1].(feedItem)
-	if !strings.Contains(it.Description(), "403") {
-		t.Fatalf("error not shown in feed list: %q", it.Description())
+	m, _ = send(t, m, runes("j")) // cursor on Beta
+	m, _ = send(t, m, feedLoadedMsg{url: testFeeds[0].URL, err: errString("x509: certificate is revoked")})
+	if got := feedNames(m); len(got) != 1 || got[0] != "Beta" {
+		t.Fatalf("failed feed should be hidden: %q", got)
 	}
-	// Opening a failed feed retries it, and says so while it loads.
-	m, cmd := send(t, m, runes("j"), enter)
-	if !m.states[testFeeds[1].URL].loading || cmd == nil || !strings.Contains(m.View(), "Loading feed") {
-		t.Fatalf("opening a failed feed should retry:\n%s", m.View())
+	if it := m.feeds.SelectedItem().(feedItem); it.f.Name != "Beta" {
+		t.Fatalf("cursor moved off Beta to %q", it.f.Name)
 	}
-	m, _ = send(t, m, feedLoadedMsg{url: testFeeds[1].URL, err: errString("GET: 403 Forbidden")})
-	if v := m.View(); !strings.Contains(v, "403") || !strings.Contains(v, "retry") {
-		t.Fatalf("articles view should show error and retry hint:\n%s", v)
+	if v := m.View(); !strings.Contains(v, "Skipped Alpha") || strings.Contains(v, "x509") {
+		t.Fatalf("expected a quiet skip notice, not the error:\n%s", v)
 	}
 
+	// Search neither retries nor counts the skipped feed.
+	m, _ = send(t, m, runes("s"))
+	if m.states[testFeeds[0].URL].loading {
+		t.Fatal("search should not retry a skipped feed")
+	}
+	m, _ = send(t, m, esc)
+
+	// Refreshing retries it, and it comes back once it loads.
+	m, _ = send(t, m, runes("r"))
+	if !m.states[testFeeds[0].URL].loading {
+		t.Fatal("r should retry skipped feeds")
+	}
+	m, _ = send(t, m, loaded(testFeeds[0].URL, "back"))
+	if got := feedNames(m); len(got) != 2 || got[0] != "Alpha" {
+		t.Fatalf("recovered feed should reappear in catalog order: %q", got)
+	}
+}
+
+func TestFeedFailingWhileOpenReturnsToList(t *testing.T) {
+	m := newTestModel(t)
+	m, _ = send(t, m, runes("j"), enter) // Beta isn't loaded yet: it starts loading
+	if m.view != articlesView || !m.states[testFeeds[1].URL].loading {
+		t.Fatalf("view=%d", m.view)
+	}
+	m, _ = send(t, m, feedLoadedMsg{url: testFeeds[1].URL, err: errString("GET: 403 Forbidden")})
+	if m.view != feedsView || len(m.feeds.Items()) != 1 {
+		t.Fatalf("should be back on the list without Beta: view=%d items=%q", m.view, feedNames(m))
+	}
+}
+
+func TestStaleFeedIsKeptAndFlagged(t *testing.T) {
+	m := newTestModel(t)
 	stale := loaded(testFeeds[0].URL, "cached")
 	stale.res = fetch.Result{Source: fetch.Stale, Err: errString("offline")}
 	m, _ = send(t, m, stale)

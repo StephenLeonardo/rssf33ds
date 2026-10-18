@@ -17,7 +17,6 @@ import (
 	"github.com/charmbracelet/lipgloss"
 
 	"github.com/aelhadii/rssf33ds/internal/catalog"
-	"github.com/aelhadii/rssf33ds/internal/content"
 	"github.com/aelhadii/rssf33ds/internal/feed"
 	"github.com/aelhadii/rssf33ds/internal/fetch"
 )
@@ -430,6 +429,21 @@ func (m Model) feedLoaded(msg feedLoadedMsg) (tea.Model, tea.Cmd) {
 	}
 
 	var cmds []tea.Cmd
+	// A feed that fails with nothing cached is skipped: it drops out of the
+	// list until a refresh (r) loads it again.
+	wasFailed := st.failed
+	st.failed = st.feed == nil && st.err != nil
+	if st.failed != wasFailed {
+		cmds = append(cmds, m.syncFeedItems())
+	}
+	if st.failed && !wasFailed {
+		name := m.opts.Feeds[m.feedIndex(msg.url)].Name
+		if m.view == articlesView && m.listURL == msg.url {
+			m.view = feedsView // the feed being opened just failed
+			m.articles.StopSpinner()
+		}
+		cmds = append(cmds, m.feeds.NewStatusMessage(metaStyle.Render("Skipped "+name+" (couldn't load it) · r to retry")))
+	}
 	if !m.anyLoading() {
 		m.feeds.StopSpinner()
 	}
@@ -441,14 +455,36 @@ func (m Model) feedLoaded(msg feedLoadedMsg) (tea.Model, tea.Cmd) {
 		if msg.feed != nil {
 			cmds = append(cmds, m.articles.SetItems(articleItems(msg.feed)))
 		}
-		switch {
-		case st.feed != nil && st.err != nil:
+		if st.feed != nil && st.err != nil {
 			cmds = append(cmds, m.articles.NewStatusMessage(m.offlineNote(st)))
-		case st.err != nil:
-			cmds = append(cmds, m.articles.NewStatusMessage(errStyle.Render("Error: "+content.Sanitize(st.err.Error()))))
 		}
 	}
 	return m, tea.Batch(cmds...)
+}
+
+// syncFeedItems rebuilds the feed list from the feeds that aren't skipped,
+// keeping the cursor on the same feed where possible.
+func (m *Model) syncFeedItems() tea.Cmd {
+	sel, idx := "", m.feeds.Index()
+	if it, ok := m.feeds.SelectedItem().(feedItem); ok {
+		sel = it.f.URL
+	}
+	var items []list.Item
+	for _, f := range m.opts.Feeds {
+		st := m.states[f.URL]
+		if st.failed {
+			continue
+		}
+		if f.URL == sel {
+			idx = len(items)
+		}
+		items = append(items, feedItem{f: f, st: st})
+	}
+	cmd := m.feeds.SetItems(items)
+	if m.feeds.FilterState() == list.Unfiltered {
+		m.feeds.Select(min(idx, max(0, len(items)-1)))
+	}
+	return cmd
 }
 
 func (m Model) offlineNote(st *feedState) string {
@@ -542,8 +578,6 @@ func (m Model) View() string {
 			return appStyle.Render(lipgloss.JoinVertical(lipgloss.Left,
 				listTitleStyle.Render(m.opts.Feeds[m.cur].Name), "",
 				m.articles.Styles.Spinner.Render("Loading feed…")))
-		case st.feed == nil && st.err != nil:
-			return appStyle.Render(m.feedError(st))
 		}
 		return appStyle.Render(m.articles.View())
 	case searchView:
@@ -551,16 +585,6 @@ func (m Model) View() string {
 	default:
 		return appStyle.Render(m.readerView())
 	}
-}
-
-func (m Model) feedError(st *feedState) string {
-	f := m.opts.Feeds[m.cur]
-	return lipgloss.JoinVertical(lipgloss.Left,
-		listTitleStyle.Render(f.Name), "",
-		errStyle.Width(m.measure()).Render("Could not load this feed: "+content.Sanitize(st.err.Error())), "",
-		metaStyle.Render(f.URL), "",
-		barStyle.Render("r retry · q back"),
-	)
 }
 
 func (m Model) readerView() string {

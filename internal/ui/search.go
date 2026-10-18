@@ -106,7 +106,7 @@ func (m Model) openSearch(scope string) (tea.Model, tea.Cmd) {
 	cmds := []tea.Cmd{m.search.Focus()}
 	// Results are only as complete as the index: load whatever is missing.
 	for _, f := range m.scopeFeeds() {
-		if st := m.states[f.URL]; st.feed == nil && !st.loading {
+		if st := m.states[f.URL]; st.feed == nil && !st.loading && !st.failed {
 			st.loading = true
 			cmds = append(cmds, loadFeed(m.opts.Client, m.sem, f, feedTTL))
 		}
@@ -141,8 +141,12 @@ func (m Model) searchCmd() tea.Cmd {
 	msg := searchResultsMsg{seq: m.searchSeq, query: strings.TrimSpace(m.search.Value())}
 	var docs []*search.Doc
 	for _, f := range m.scopeFeeds() {
+		st := m.states[f.URL]
+		if st.failed {
+			continue // skipped feeds don't count against coverage
+		}
 		msg.total++
-		if st := m.states[f.URL]; st.docs != nil {
+		if st.docs != nil {
 			msg.indexed++
 			docs = append(docs, st.docs...)
 		}

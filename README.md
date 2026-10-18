@@ -3,7 +3,7 @@
 **A distraction-free terminal reader for backend and systems engineering blogs.**
 
 Netflix, Cloudflare, AWS Architecture, Stripe, Datadog, Martin Fowler, High
-Scalability, Marc Brooker, Jepsen and 28 more, in one keyboard-driven TUI.
+Scalability, Marc Brooker, Jepsen and 27 more, in one keyboard-driven TUI.
 Articles are fetched in full, stripped of ads and clutter, and wrapped to your
 terminal. You can full-text search across every blog as you type.
 
@@ -15,7 +15,7 @@ Built in Go with [Bubble Tea](https://github.com/charmbracelet/bubbletea),
   Search · all blogs
 
   / kafka
-  34 results · 36/37 blogs
+  34 results · 36/36 blogs
   │ Kafka 101
   │ High Scalability · 2024-05-09 · This is a guest article by Stanislav Kozlovski, an Apache Kafka Committ…
 
@@ -28,7 +28,7 @@ Built in Go with [Bubble Tea](https://github.com/charmbracelet/bubbletea),
 
 ## Features
 
-- **37 curated feeds.** Every URL was verified with a live request. The list
+- **36 curated feeds.** Every URL was verified with a live request. The list
   is grouped into company engineering blogs, individual engineers and
   researchers, and publications.
 - **Three views.** Feed list → article list (title, date, summary) → reader.
@@ -104,7 +104,7 @@ that take a few milliseconds.
 
 ## Feeds
 
-**Company engineering** (25): [Netflix TechBlog](https://netflixtechblog.com/feed) · [Cloudflare Blog](https://blog.cloudflare.com/rss/) · [AWS Architecture Blog](https://aws.amazon.com/blogs/architecture/feed/) · [Stripe Blog](https://stripe.com/blog/feed.rss) · [Stripe Dev Blog](https://stripe.dev/feed) · [Datadog Engineering](https://www.datadoghq.com/blog/engineering/index.xml) · [Meta Engineering](https://engineering.fb.com/feed/) · [Discord Blog](https://discord.com/blog/rss.xml) · [Slack Engineering](https://slack.engineering/feed/) · [Dropbox Tech](https://dropbox.tech/feed) · [Spotify Engineering](https://engineering.atspotify.com/feed/) · [GitHub Engineering](https://github.blog/engineering/feed/) · [Airbnb Engineering](https://medium.com/feed/airbnb-engineering) · [Pinterest Engineering](https://medium.com/feed/pinterest-engineering) · [Shopify Engineering](https://shopify.engineering/blog.atom) · [Lyft Engineering](https://eng.lyft.com/feed) · [Grab Engineering](https://engineering.grab.com/feed.xml) · [Zalando Engineering](https://engineering.zalando.com/atom.xml) · [Salesforce Engineering](https://engineering.salesforce.com/feed/) · [Fly.io Blog](https://fly.io/blog/feed.xml) · [PlanetScale Blog](https://planetscale.com/blog/rss.xml) · [Tailscale Blog](https://tailscale.com/blog/index.xml) · [Honeycomb Blog](https://www.honeycomb.io/feed) · [Confluent Blog](https://www.confluent.io/rss.xml) · [Jane Street Tech Blog](https://blog.janestreet.com/feed.xml)
+**Company engineering** (24): [Netflix TechBlog](https://netflixtechblog.com/feed) · [Cloudflare Blog](https://blog.cloudflare.com/rss/) · [AWS Architecture Blog](https://aws.amazon.com/blogs/architecture/feed/) · [Stripe Dev Blog](https://stripe.dev/blog/feed) · [Datadog Engineering](https://www.datadoghq.com/blog/engineering/index.xml) · [Meta Engineering](https://engineering.fb.com/feed/) · [Discord Blog](https://discord.com/blog/rss.xml) · [Slack Engineering](https://slack.engineering/feed/) · [Dropbox Tech](https://dropbox.tech/feed) · [Spotify Engineering](https://engineering.atspotify.com/feed/) · [GitHub Engineering](https://github.blog/engineering/feed/) · [Airbnb Engineering](https://medium.com/feed/airbnb-engineering) · [Pinterest Engineering](https://medium.com/feed/pinterest-engineering) · [Shopify Engineering](https://shopify.engineering/blog.atom) · [Lyft Engineering](https://eng.lyft.com/feed) · [Grab Engineering](https://engineering.grab.com/feed.xml) · [Zalando Engineering](https://engineering.zalando.com/atom.xml) · [Salesforce Engineering](https://engineering.salesforce.com/feed/) · [Fly.io Blog](https://fly.io/blog/feed.xml) · [PlanetScale Blog](https://planetscale.com/blog/rss.xml) · [Tailscale Blog](https://tailscale.com/blog/index.xml) · [Honeycomb Blog](https://www.honeycomb.io/feed) · [Confluent Blog](https://www.confluent.io/rss.xml) · [Jane Street Tech Blog](https://blog.janestreet.com/feed.xml)
 
 **Engineers & researchers** (8): [Martin Fowler](https://martinfowler.com/feed.atom) · [All Things Distributed (Werner Vogels)](https://www.allthingsdistributed.com/atom.xml) · [Marc Brooker](https://brooker.co.za/blog/rss.xml) · [Brendan Gregg](https://www.brendangregg.com/blog/rss.xml) · [Metadata (Murat Demirbas)](https://muratbuffalo.blogspot.com/feeds/posts/default) · [Jepsen](https://jepsen.io/blog.rss) · [Aphyr](https://aphyr.com/posts.atom) · [Dan Luu](https://danluu.com/atom.xml)
 
@@ -112,8 +112,16 @@ that take a few milliseconds.
 
 Some blogs were searched for but left out because they no longer publish a
 working feed: Uber Engineering, LinkedIn Engineering, DoorDash, Twitter/X
-Engineering and Cockroach Labs. The verifier re-checks them on every run (see
+Engineering and Cockroach Labs. Stripe's main blog feed (`stripe.com/blog/feed.rss`)
+is also out: Go's TLS verification rejects its certificate chain on some macOS
+trust stores. The [Stripe Dev Blog](https://stripe.dev/blog) covers Stripe
+engineering instead. The verifier re-checks all of these on every run (see
 below).
+
+If a feed fails to load while you're using the app and nothing is cached,
+it's skipped: it disappears from the feed list (with a brief "Skipped …"
+notice) rather than showing an error. Press `r` to retry; it comes back once
+it loads.
 
 To add a feed, append it to [`internal/catalog/catalog.go`](internal/catalog/catalog.go)
 and run the verifier.

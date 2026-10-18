@@ -36,6 +36,9 @@ var candidates = []catalog.Feed{
 	{Name: "DoorDash Engineering", URL: "https://careersatdoordash.com/feed/"},
 	{Name: "Twitter/X Engineering", URL: "https://blog.twitter.com/engineering/en_us/blog.rss"},
 	{Name: "CockroachDB Blog", URL: "https://www.cockroachlabs.com/blog/index.xml"},
+	// Valid feed, but Go's TLS verification rejects stripe.com's chain on
+	// some macOS trust stores; stripe.dev/blog/feed is in the catalog instead.
+	{Name: "Stripe Blog (stripe.com)", URL: "https://stripe.com/blog/feed.rss"},
 }
 
 // A feed whose newest entry is older than this is flagged stale.

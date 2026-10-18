@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/aelhadii/rssf33ds/internal/catalog"
-	"github.com/aelhadii/rssf33ds/internal/content"
 	"github.com/aelhadii/rssf33ds/internal/feed"
 	"github.com/aelhadii/rssf33ds/internal/fetch"
 	"github.com/aelhadii/rssf33ds/internal/search"
@@ -15,6 +14,7 @@ import (
 // the feed list items, so status updates show up without rebuilding the list.
 type feedState struct {
 	loading   bool
+	failed    bool // last load failed with nothing cached; hidden from the list
 	feed      *feed.Feed
 	err       error // last error; with feed != nil it was served from stale cache
 	source    fetch.Source
@@ -35,8 +35,6 @@ func (i feedItem) Description() string {
 	switch {
 	case st.loading && st.feed == nil:
 		return i.f.Category + " · loading…"
-	case st.feed == nil && st.err != nil:
-		return i.f.Category + " · error: " + content.Sanitize(st.err.Error())
 	case st.feed == nil:
 		return i.f.Category
 	}
