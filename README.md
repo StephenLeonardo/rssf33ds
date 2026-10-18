@@ -52,11 +52,26 @@ Built in Go with [Bubble Tea](https://github.com/charmbracelet/bubbletea),
 
 ## Install
 
-Requires Go 1.26 or newer.
+**Prebuilt binaries** for macOS, Linux and Windows (amd64 and arm64) are on
+the [releases page](https://github.com/aelhadii/rssf33ds/releases/latest).
+Download the archive for your platform, extract it, and put `rssf33ds` on
+your `PATH`.
+
+```sh
+# macOS (Apple silicon). Swap the archive name for your platform.
+curl -LO https://github.com/aelhadii/rssf33ds/releases/latest/download/rssf33ds_darwin_arm64.tar.gz
+tar xzf rssf33ds_darwin_arm64.tar.gz && ./rssf33ds
+```
+
+On macOS, a binary downloaded with a browser is quarantined by Gatekeeper
+(the binaries aren't notarized). Clear the flag with
+`xattr -d com.apple.quarantine rssf33ds`. Downloading with `curl`, as above,
+avoids this.
+
+**With Go** (1.26 or newer):
 
 ```sh
 go install github.com/aelhadii/rssf33ds@latest
-rssf33ds
 ```
 
 Or from a clone:
@@ -72,6 +87,7 @@ go run .
 |------|---------|--|
 | `-style` | from terminal background | Reader theme: `dark`, `light`, `dracula`, `tokyo-night`, `pink`, `ascii`, `notty`. `GLAMOUR_STYLE` also works. |
 | `-no-prefetch` | off | Don't load every feed at startup; load each one when you open it. |
+| `-version` | | Print the version and exit. |
 | `-cache` | OS user cache dir | Where to cache feeds and pages (`~/Library/Caches/rssf33ds` on macOS). Empty disables the disk cache. |
 
 ## Keys
@@ -214,3 +230,7 @@ The unit tests cover parsing, clutter removal, sanitizing, caching, retries,
 cache pruning, panic recovery, ranking and the UI state machine (navigation, filtering vs. back, dropping stale async
 results, wrapping and resize). The `live` tests drive the real model against
 the network and print the rendered screens.
+
+## License
+
+[MIT](LICENSE)
