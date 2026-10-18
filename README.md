@@ -60,7 +60,8 @@ your `PATH`.
 ```sh
 # macOS (Apple silicon). Swap the archive name for your platform.
 curl -LO https://github.com/aelhadii/rssf33ds/releases/latest/download/rssf33ds_darwin_arm64.tar.gz
-tar xzf rssf33ds_darwin_arm64.tar.gz && ./rssf33ds
+tar xzf rssf33ds_darwin_arm64.tar.gz
+./rssf33ds_darwin_arm64/rssf33ds
 ```
 
 On macOS, a binary downloaded with a browser is quarantined by Gatekeeper
